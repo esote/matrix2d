@@ -1,0 +1,8 @@
+Search a rectangular, sorted (column-wise and row-wise) matrix.
+
+Returns (Point{-1, -1}, false) if no key is found.
+
+All code branches are covered by matrix2d_test.go.
+
+Uses the algorithm described by Craig Gidney: http://twistedoakstudios.com/blog/Post5365_searching-a-sorted-matrix-faster
+
