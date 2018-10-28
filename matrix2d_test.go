@@ -1,3 +1,6 @@
+// Copyright 2018 Esote. All rights reserved. Use of this source code is
+// governed by an MIT license that can be found in the LICENSE file.
+
 package matrix2d
 
 import (
@@ -5,7 +8,7 @@ import (
 )
 
 // Valid matrix.
-func TestSearch2D(t *testing.T) {
+func TestSearch(t *testing.T) {
 	// 3x5 matrix
 	matrix := [][]int{
 		{1, 2, 3, 4, 5},
@@ -16,23 +19,23 @@ func TestSearch2D(t *testing.T) {
 	item := 3
 	want := Point{0, 2}
 
-	got, ok := Search2D(matrix, item)
+	got, ok := Search(matrix, item)
 
 	if !ok {
 		t.Errorf("want: %t, got %t", true, ok)
 	}
 
 	if got != want {
-		t.Errorf("want: (%d, %d), got: (%d, %d)", want.x, want.y, got.x, got.y)
+		t.Errorf("want: (%d, %d), got: (%d, %d)", want.X, want.Y, got.X, got.Y)
 	}
 
-	if e := matrix[got.x][got.y]; e != item {
+	if e := matrix[got.X][got.Y]; e != item {
 		t.Errorf("want: %d, got: %d", item, e)
 	}
 }
 
 // Valid matrix, but needs to be transposed.
-func TestSearch2DRotated(t *testing.T) {
+func TestSearchRotated(t *testing.T) {
 	// 5x3 matrix
 	matrix := [][]int{
 		{1, 1, 1},
@@ -45,26 +48,26 @@ func TestSearch2DRotated(t *testing.T) {
 	item := 16
 	want := Point{3, 0}
 
-	got, ok := Search2D(matrix, item)
+	got, ok := Search(matrix, item)
 
 	if !ok {
 		t.Errorf("want: %t, got %t", true, ok)
 	}
 
 	if got != want {
-		t.Errorf("want: (%d, %d), got: (%d, %d)", want.x, want.y, got.x, got.y)
+		t.Errorf("want: (%d, %d), got: (%d, %d)", want.X, want.Y, got.X, got.Y)
 	}
 
-	if e := matrix[got.x][got.y]; e != item {
+	if e := matrix[got.X][got.Y]; e != item {
 		t.Errorf("want: %d, got: %d", item, e)
 	}
 }
 
 // Invalid width (zero columns).
-func TestSearch2DWidth(t *testing.T) {
+func TestSearchWidth(t *testing.T) {
 	var matrix [][]int
 
-	got, ok := Search2D(matrix, 0)
+	got, ok := Search(matrix, 0)
 
 	want := Point{-1, -1}
 
@@ -73,16 +76,16 @@ func TestSearch2DWidth(t *testing.T) {
 	}
 
 	if got != want {
-		t.Errorf("want: (%d, %d), got: (%d, %d)", want.x, want.y, got.x, got.y)
+		t.Errorf("want: (%d, %d), got: (%d, %d)", want.X, want.Y, got.X, got.Y)
 	}
 }
 
 // Invalid height (zero rows).
-func TestSearch2DHeight(t *testing.T) {
+func TestSearchHeight(t *testing.T) {
 	matrix := make([][]int, 3)
 	matrix[0] = make([]int, 0)
 
-	got, ok := Search2D(matrix, 0)
+	got, ok := Search(matrix, 0)
 
 	want := Point{-1, -1}
 
@@ -91,12 +94,12 @@ func TestSearch2DHeight(t *testing.T) {
 	}
 
 	if got != want {
-		t.Errorf("want: (%d, %d), got: (%d, %d)", want.x, want.y, got.x, got.y)
+		t.Errorf("want: (%d, %d), got: (%d, %d)", want.X, want.Y, got.X, got.Y)
 	}
 }
 
 // Not found.
-func TestSearch2DNotFound(t *testing.T) {
+func TestSearchNotFound(t *testing.T) {
 	// 3x5 matrix
 	matrix := [][]int{
 		{1, 2, 3, 4, 5},
@@ -107,19 +110,19 @@ func TestSearch2DNotFound(t *testing.T) {
 	item := 15
 	want := Point{-1, -1}
 
-	got, ok := Search2D(matrix, item)
+	got, ok := Search(matrix, item)
 
 	if ok {
 		t.Errorf("want: %t, got %t", false, ok)
 	}
 
 	if got != want {
-		t.Errorf("want: (%d, %d), got: (%d, %d)", want.x, want.y, got.x, got.y)
+		t.Errorf("want: (%d, %d), got: (%d, %d)", want.X, want.Y, got.X, got.Y)
 	}
 }
 
 // After middle, checking branch used with find-middle on even lengths.
-func TestSearch2DAfterMid(t *testing.T) {
+func TestSearchAfterMid(t *testing.T) {
 	// 3x6 matrix
 	matrix := [][]int{
 		{1, 2, 3, 4, 5, 9},
@@ -127,17 +130,17 @@ func TestSearch2DAfterMid(t *testing.T) {
 
 	item := 5
 	want := Point{0, 4}
-	got, ok := Search2D(matrix, item)
+	got, ok := Search(matrix, item)
 
 	if !ok {
 		t.Errorf("want: %t, got %t", false, ok)
 	}
 
 	if got != want {
-		t.Errorf("want: (%d, %d), got: (%d, %d)", want.x, want.y, got.x, got.y)
+		t.Errorf("want: (%d, %d), got: (%d, %d)", want.X, want.Y, got.X, got.Y)
 	}
 
-	if e := matrix[got.x][got.y]; e != item {
+	if e := matrix[got.X][got.Y]; e != item {
 		t.Errorf("want: %d, got: %d", item, e)
 	}
 }

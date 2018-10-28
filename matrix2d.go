@@ -1,13 +1,16 @@
+// Copyright 2018 Esote. All rights reserved. Use of this source code is
+// governed by an MIT license that can be found in the LICENSE file.
+
 package matrix2d
 
 // Point represents a point in the matrix, indexed by row and column.
 type Point struct {
-	x int
-	y int
+	X int
+	Y int
 }
 
-// Search2D searches a rectangular, sorted (column-wise and row-wise) matrix.
-func Search2D(matrix [][]int, key int) (Point, bool) {
+// Search searches a rectangular, sorted (column-wise and row-wise) matrix.
+func Search(matrix [][]int, key int) (Point, bool) {
 	badpt := Point{-1, -1}
 
 	width := len(matrix)
@@ -23,8 +26,8 @@ func Search2D(matrix [][]int, key int) (Point, bool) {
 	}
 
 	if height < width {
-		ret, ok := Search2D(lazyTranspose(matrix), key)
-		return Point{ret.y, ret.x}, ok
+		ret, ok := Search(lazyTranspose(matrix), key)
+		return Point{ret.Y, ret.X}, ok
 	}
 
 	minc := 0
